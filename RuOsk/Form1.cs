@@ -15,6 +15,8 @@ namespace RuOsk
 {
     public partial class Form1 : Form
     {
+        const string AppName = "RuOsk";
+        
         [DllImport("user32.dll", SetLastError = true)]
         private static extern IntPtr FindWindow(string lpClassName, string ldWindowName);
 
@@ -368,15 +370,15 @@ namespace RuOsk
             {
                 SetForegroundWindow(theHandle);
                 windowText = GetText(theHandle);
-                if (!string.IsNullOrEmpty(windowText) && windowText != "RuOsk")
-                    this.Text = "Adding text to " + windowText;
+                if (!string.IsNullOrEmpty(windowText) && windowText != AppName)
+                    this.Text = "Adding text to: " + windowText;
                 else
-                    this.Text = "RuOsk";
+                    this.Text = AppName;
                 
                 SendKeys.Send(letter2);
             }
 
-            if (windowText != "RuOsk")
+            if (windowText != AppName)
             {
                 if (letter == "\b" && textBox1.Text.Length > 0)
                     textBox1.Text = textBox1.Text.Substring(0, textBox1.Text.Length - 1);
