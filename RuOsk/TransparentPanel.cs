@@ -7,11 +7,11 @@ using System.Data;
 
 namespace RuOsk
 {
-    public class TransPanel : Panel
+    public class TransparentPanel : Panel
     {
         Timer Wriggler = new Timer();
 
-        public TransPanel()
+        public TransparentPanel()
         {
             Wriggler.Tick += new EventHandler(TickHandler);
             this.Wriggler.Interval = 500;

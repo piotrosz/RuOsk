@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Globalization;
-using RuOsk.Transliteration.Implenentations;
+using RuOsk.Transliteration.Implementations;
 using TransliterationRU.Engine;
 
 namespace RuOsk
@@ -16,56 +16,22 @@ namespace RuOsk
     public partial class Form1 : Form
     {
         const string AppName = "RuOsk";
-        
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern IntPtr FindWindow(string lpClassName, string ldWindowName);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern bool SetForegroundWindow(IntPtr hWnd);
-
-        //Gets active window title
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern int GetWindowText(IntPtr hwnd, string lpString, int cch);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
-
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        static extern int GetWindowTextLength(IntPtr hWnd);
-
-        public static string GetText(IntPtr hWnd)
-        {
-            // Allocate correct string length first
-            int length = GetWindowTextLength(hWnd);
-            StringBuilder sb = new StringBuilder(length + 1);
-            GetWindowText(hWnd, sb, sb.Capacity);
-            return sb.ToString();
-        }
-
-        //Gets handle for active window
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern IntPtr GetForegroundWindow();
-
-        private const int WS_EX_NOACTIVATE = 0x08000000;
 
         protected override CreateParams CreateParams
         {
             get
             {
                 CreateParams param = base.CreateParams;
-                param.ExStyle |= WS_EX_NOACTIVATE;
+                param.ExStyle |= NativeWin32.WS_EX_NOACTIVATE;
                 return param;
             }
         }
 
-        private const int WM_MOUSEACTIVATE = 0x0021;
-        private const int MA_NOACTIVATE = 0x0003;
-
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == WM_MOUSEACTIVATE)
+            if (m.Msg == NativeWin32.WM_MOUSEACTIVATE)
             {
-                m.Result = new IntPtr(MA_NOACTIVATE);
+                m.Result = new IntPtr(NativeWin32.MA_NOACTIVATE);
             }
             else
             {
@@ -82,6 +48,11 @@ namespace RuOsk
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+            CreateControls();
+        }
+
+        private void CreateControls()
         {
             int offset = 46;
             int left = 16;
@@ -146,7 +117,7 @@ namespace RuOsk
 
             var p15 = CreatePanel(top, left += offset);
             p15.Click += new EventHandler(p15_Click);
-            this.Controls.Add(p15); 
+            this.Controls.Add(p15);
             #endregion
 
             left = 16;
@@ -340,9 +311,9 @@ namespace RuOsk
             pictureBox1.SendToBack();
         }
 
-        private TransPanel CreatePanel(int top, int left)
+        private TransparentPanel CreatePanel(int top, int left)
         {
-            var p = new TransPanel();
+            var p = new TransparentPanel();
             p.Width = 35;
             p.Height = 37;
             p.Top = top;
@@ -364,17 +335,18 @@ namespace RuOsk
             if (ShiftPressed)
                 ShiftPressed = false;
 
-            IntPtr theHandle = GetForegroundWindow();
+            IntPtr theHandle = NativeWin32.GetForegroundWindow();
             string windowText = "";
             if (theHandle != IntPtr.Zero)
             {
-                SetForegroundWindow(theHandle);
-                windowText = GetText(theHandle);
+                NativeWin32.SetForegroundWindow(theHandle);
+                windowText = NativeWin32.GetText(theHandle);
+
                 if (!string.IsNullOrEmpty(windowText) && windowText != AppName)
                     this.Text = "Adding text to: " + windowText;
                 else
                     this.Text = AppName;
-                
+
                 SendKeys.Send(letter2);
             }
 
@@ -398,43 +370,40 @@ namespace RuOsk
 
         private void btnCopy_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(textBox1.SelectedText))
-                Clipboard.SetText(textBox1.SelectedText);
-            else
-                Clipboard.SetText(textBox1.Text);
+            Clipboard.SetText(
+                string.IsNullOrEmpty(textBox1.SelectedText) ? textBox1.Text : textBox1.SelectedText);
         }
 
         private void btnCut_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox1.SelectedText))
-            {
-                Clipboard.SetText(textBox1.SelectedText);
-                textBox1.SelectedText = "";
-            }
-            else
+            if (string.IsNullOrEmpty(textBox1.SelectedText))
             {
                 Clipboard.SetText(textBox1.Text);
                 textBox1.Text = "";
+            }
+            else
+            {
+                Clipboard.SetText(textBox1.SelectedText);
+                textBox1.SelectedText = "";
             }
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(textBox1.SelectedText))
-                textBox1.SelectedText = "";
-            else
+            if (string.IsNullOrEmpty(textBox1.SelectedText))
                 textBox1.Text = "";
+            else
+                textBox1.SelectedText = "";
         }
 
         private void btnTranslit_Click(object sender, EventArgs e)
         {
-            var entrans = new Transliteration_En();
-            var trans = new Engine(entrans);
+            var trans = new Engine(new Transliteration_En());
 
-            if (string.IsNullOrEmpty(textBox1.SelectedText))
-                Clipboard.SetText(trans.Trasliterate(textBox1.Text));
-            else
-                Clipboard.SetText(trans.Trasliterate(textBox1.SelectedText));
+            string text = trans.Trasliterate(
+                string.IsNullOrEmpty(textBox1.SelectedText) ? textBox1.Text : textBox1.SelectedText);
+
+            Clipboard.SetText(text);
         }
     }
 }

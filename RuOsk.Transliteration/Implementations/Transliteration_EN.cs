@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using RuOsk.Transliteration.Interfaces;
 
-namespace RuOsk.Transliteration.Implenentations
+namespace RuOsk.Transliteration.Implementations
 {
     public class Transliteration_En : ITransliteration
     {

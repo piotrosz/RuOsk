@@ -43,11 +43,11 @@
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(3, 266);
+            this.textBox1.Location = new System.Drawing.Point(5, 259);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(629, 104);
+            this.textBox1.Size = new System.Drawing.Size(579, 111);
             this.textBox1.TabIndex = 1;
             // 
             // pictureBox1
@@ -61,46 +61,56 @@
             // 
             // btnCopy
             // 
-            this.btnCopy.Location = new System.Drawing.Point(638, 267);
+            this.btnCopy.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnCopy.Location = new System.Drawing.Point(590, 266);
             this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(76, 23);
+            this.btnCopy.Size = new System.Drawing.Size(124, 23);
             this.btnCopy.TabIndex = 8;
-            this.btnCopy.Text = "Copy";
-            this.btnCopy.UseVisualStyleBackColor = true;
+            this.btnCopy.Text = "COPY";
+            this.btnCopy.UseVisualStyleBackColor = false;
             this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
             // 
             // btnCut
             // 
-            this.btnCut.Location = new System.Drawing.Point(638, 294);
+            this.btnCut.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnCut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnCut.Location = new System.Drawing.Point(590, 294);
             this.btnCut.Name = "btnCut";
-            this.btnCut.Size = new System.Drawing.Size(76, 23);
+            this.btnCut.Size = new System.Drawing.Size(124, 23);
             this.btnCut.TabIndex = 9;
-            this.btnCut.Text = "Cut";
-            this.btnCut.UseVisualStyleBackColor = true;
+            this.btnCut.Text = "CUT";
+            this.btnCut.UseVisualStyleBackColor = false;
             this.btnCut.Click += new System.EventHandler(this.btnCut_Click);
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(638, 321);
+            this.btnClear.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnClear.Location = new System.Drawing.Point(590, 321);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(76, 23);
+            this.btnClear.Size = new System.Drawing.Size(124, 23);
             this.btnClear.TabIndex = 10;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Text = "CLEAR";
+            this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnTranslit
             // 
-            this.btnTranslit.Location = new System.Drawing.Point(638, 348);
+            this.btnTranslit.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnTranslit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnTranslit.Location = new System.Drawing.Point(590, 347);
             this.btnTranslit.Name = "btnTranslit";
-            this.btnTranslit.Size = new System.Drawing.Size(76, 23);
+            this.btnTranslit.Size = new System.Drawing.Size(124, 23);
             this.btnTranslit.TabIndex = 11;
-            this.btnTranslit.Text = "Copy translit";
-            this.btnTranslit.UseVisualStyleBackColor = true;
+            this.btnTranslit.Text = "COPY TRANSLIT";
+            this.btnTranslit.UseVisualStyleBackColor = false;
             this.btnTranslit.Click += new System.EventHandler(this.btnTranslit_Click);
             // 
             // Form1
             // 
+            this.AccessibleDescription = "RuOsk - Russian on-screen keyboard";
+            this.AccessibleName = "RuOsk";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -111,9 +121,11 @@
             this.Controls.Add(this.btnCopy);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.pictureBox1);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
+            this.Opacity = 0.9D;
             this.ShowIcon = false;
             this.Text = "RuOsk";
             this.TopMost = true;
