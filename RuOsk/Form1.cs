@@ -313,13 +313,13 @@ namespace RuOsk
 
         private TransparentPanel CreatePanel(int top, int left)
         {
-            var p = new TransparentPanel();
-            p.Width = 35;
-            p.Height = 37;
-            p.Top = top;
-            p.Left = left;
-            p.BackColor = Color.Red;
-            return p;
+            var panel = new TransparentPanel();
+            panel.Width = 35;
+            panel.Height = 37;
+            panel.Top = top;
+            panel.Left = left;
+            panel.BackColor = Color.Red;
+            return panel;
         }
 
         private void HandleKeyClick(string letter)
