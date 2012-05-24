@@ -340,13 +340,13 @@ namespace RuOsk
 
         private TransPanel CreatePanel(int top, int left)
         {
-            var p = new TransPanel();
-            p.Width = 35;
-            p.Height = 37;
-            p.Top = top;
-            p.Left = left;
-            p.BackColor = Color.Red;
-            return p;
+            var panel = new TransPanel();
+            panel.Width = 35;
+            panel.Height = 37;
+            panel.Top = top;
+            panel.Left = left;
+            panel.BackColor = Color.Red;
+            return panel;
         }
 
         private void HandleKeyClick(string letter)
