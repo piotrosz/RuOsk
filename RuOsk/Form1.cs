@@ -360,7 +360,7 @@ namespace RuOsk
                     textBox1.Text += letter2;
             }
 
-            // Scroll down
+            // Scroll down!
             if (textBox1.Text.Length > 1)
             {
                 textBox1.Select(textBox1.Text.Length - 1, 0);
