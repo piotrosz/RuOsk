@@ -350,8 +350,11 @@ namespace RuOsk
         {
             if (string.IsNullOrEmpty(textBox1.SelectedText))
             {
-                Clipboard.SetText(textBox1.Text);
-                textBox1.Text = "";
+                if (!string.IsNullOrEmpty(textBox1.Text))
+                {
+                    Clipboard.SetText(textBox1.Text);
+                    textBox1.Text = "";
+                }
             }
             else
             {
