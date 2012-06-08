@@ -15,8 +15,6 @@ namespace RuOsk
 {
     public partial class Form1 : Form
     {
-        const string AppName = "RuOsk";
-
         protected override CreateParams CreateParams
         {
             get
@@ -50,6 +48,25 @@ namespace RuOsk
         private void Form1_Load(object sender, EventArgs e)
         {
             CreateControls();
+            ResizeWindow();
+            AssingLabels();
+        }
+
+        private void ResizeWindow()
+        {
+            pictureBox1.Width = pictureBox1.Image.Width;
+            this.Width = pictureBox1.Width;
+
+            this.Height = pictureBox1.Height + splitContainer1.Height + 30;
+        }
+
+        private void AssingLabels()
+        {
+            btnTranslit.Text = Labels.btnTranslitLong;
+            btnCopy.Text = Labels.btnCopyLong;
+            btnCut.Text = Labels.btnCutLong;
+            btnClear.Text = Labels.btnClearLong;
+            btnTogglePanel.Text = Labels.btnToggleHide;
         }
 
         private void CreateControls()
@@ -322,52 +339,7 @@ namespace RuOsk
             return panel;
         }
 
-        private void HandleKeyClick(string letter)
-        {
-            string letter2 = "";
-            if (letter == "." && (CapsLockPressed || ShiftPressed))
-                letter2 = ",";
-            else if (CapsLockPressed || ShiftPressed)
-                letter2 = letter.ToUpper();
-            else
-                letter2 = letter;
-
-            if (ShiftPressed)
-                ShiftPressed = false;
-
-            IntPtr theHandle = NativeWin32.GetForegroundWindow();
-            string windowText = "";
-            if (theHandle != IntPtr.Zero)
-            {
-                NativeWin32.SetForegroundWindow(theHandle);
-                windowText = NativeWin32.GetText(theHandle);
-
-                if (!string.IsNullOrEmpty(windowText) && windowText != AppName)
-                    this.Text = "Adding text to: " + windowText;
-                else
-                    this.Text = AppName;
-
-                SendKeys.Send(letter2);
-            }
-
-            if (windowText != AppName)
-            {
-                if (letter == "\b" && textBox1.Text.Length > 0)
-                    textBox1.Text = textBox1.Text.Substring(0, textBox1.Text.Length - 1);
-                else if (letter == "\n")
-                    textBox1.Text += "\r\n";
-                else if (letter != "\b")
-                    textBox1.Text += letter2;
-            }
-
-            // Scroll down!
-            if (textBox1.Text.Length > 1)
-            {
-                textBox1.Select(textBox1.Text.Length - 1, 0);
-                textBox1.ScrollToCaret();
-            }
-        }
-
+        
         private void btnCopy_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(
@@ -404,6 +376,33 @@ namespace RuOsk
                 string.IsNullOrEmpty(textBox1.SelectedText) ? textBox1.Text : textBox1.SelectedText);
 
             Clipboard.SetText(text);
+        }
+
+        private void btnTranslit_Resize(object sender, EventArgs e)
+        {
+            btnTranslit.Text = (btnTranslit.Width < 100) ? Labels.btnTranslitShort : Labels.btnTranslitLong;
+        }
+
+        private void btnClear_Resize(object sender, EventArgs e)
+        {
+            btnClear.Text = (btnClear.Width < 70) ? Labels.btnClearShort : Labels.btnClearLong;
+        }
+
+        private void btnCopy_Resize(object sender, EventArgs e)
+        {
+            btnCopy.Text = (btnCopy.Width < 70) ? Labels.btnCopyShort : Labels.btnCopyLong;
+        }
+
+        private void btnToggle_Click(object sender, EventArgs e)
+        {
+            splitContainer1.Visible = !splitContainer1.Visible;
+
+            if (splitContainer1.Visible)
+                this.Height = pictureBox1.Height + splitContainer1.Height + 30;
+            else
+                this.Height = pictureBox1.Height + 25;
+
+            btnTogglePanel.Text = splitContainer1.Visible ? Labels.btnToggleHide : Labels.btnToggleShow;
         }
     }
 }
