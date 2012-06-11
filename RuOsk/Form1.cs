@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Globalization;
 using RuOsk.Transliteration.Implementations;
 using TransliterationRU.Engine;
+using RuOsk.Properties;
 
 namespace RuOsk
 {
@@ -47,17 +48,92 @@ namespace RuOsk
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            CreateControls();
-            ResizeWindow();
+            AddButtons();
             AssingLabels();
         }
 
-        private void ResizeWindow()
+        private void AddButtons()
         {
-            pictureBox1.Width = pictureBox1.Image.Width;
-            this.Width = pictureBox1.Width;
+            AddButtons(keyboardRow1, new List<Control>()
+            {
+                CreateButton("ё"),
+                CreateButton("1"),
+                CreateButton("2"),
+                CreateButton("3"),
+                CreateButton("4"),
+                CreateButton("5"),
+                CreateButton("6"), 
+                CreateButton("7"), 
+                CreateButton("8"), 
+                CreateButton("9"), 
+                CreateButton("0"), 
+                CreateButton("-"), 
+                CreateButton("="), 
+                CreateButton("\\"),
+                CreateButton("<-", (o, e) => { HandleKeyClick("\b", e); })
+            });
 
-            this.Height = pictureBox1.Height + splitContainer1.Height + 30;
+            AddButtons(keyboardRow2, new List<Control>()
+            {
+                CreateButton("TAB", (o, e) => { HandleKeyClick("\t", e); }),
+                CreateButton("й"),
+                CreateButton("ц"),
+                CreateButton("у"),
+                CreateButton("к"),
+                CreateButton("е"),
+                CreateButton("н"),
+                CreateButton("г"),
+                CreateButton("ш"),
+                CreateButton("щ"),
+                CreateButton("з"),
+                CreateButton("х"),
+                CreateButton("ъ")
+            });
+
+            AddButtons(keyboardRow3, new List<Control>()
+            {
+                CreateCheckbox("CAPS LOCK", (o, e) => { CapsLockPressed = !CapsLockPressed; }),
+                CreateButton("ф"),
+                CreateButton("ы"),
+                CreateButton("в"),
+                CreateButton("а"),
+                CreateButton("п"),
+                CreateButton("р"),
+                CreateButton("о"),
+                CreateButton("л"),
+                CreateButton("д"),
+                CreateButton("ж"),
+                CreateButton("э"),
+                CreateButton("ENTER", (o, e) => { HandleKeyClick("\n", e); }),
+            });
+
+            AddButtons(keyboardRow4, new List<Control>()
+            {
+                CreateButton("SHIFT", (o, e) => { ShiftPressed = true; }),
+                CreateButton("я"),
+                CreateButton("ч"),
+                CreateButton("с"),
+                CreateButton("м"),
+                CreateButton("и"),
+                CreateButton("т"),
+                CreateButton("ь"),
+                CreateButton("б"),
+                CreateButton("ю"),
+                CreateButton("."),
+                CreateButton("SHIFT", (o, e) => { ShiftPressed = true; })
+            });
+
+            AddButtons(keyboardRow5, new List<Control>()
+            {
+                CreateButton("SPACE", (o, e) => { HandleKeyClick(" ", e); }),
+                //CreateButton(Labels.btnToggleHide, (o, e) => { btnToggle_Click(o, e); })
+            });
+        }
+
+        private void AddButtons(TableLayoutPanel row, List<Control> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+                row.Controls.Add(list[i], i, 0);
         }
 
         private void AssingLabels()
@@ -66,284 +142,20 @@ namespace RuOsk
             btnCopy.Text = Labels.btnCopyLong;
             btnCut.Text = Labels.btnCutLong;
             btnClear.Text = Labels.btnClearLong;
-            btnTogglePanel.Text = Labels.btnToggleHide;
+            //btnTogglePanel.Text = Labels.btnToggleHide;
         }
 
-        private void CreateControls()
-        {
-            int offset = 46;
-            int left = 16;
-            int top = 13;
-
-            #region Row #1
-            var p1 = CreatePanel(top, left);
-            p1.Click += new EventHandler(p1_Click);
-            this.Controls.Add(p1);
-
-            var p2 = CreatePanel(top, left += offset);
-            p2.Click += new EventHandler(p2_Click);
-            this.Controls.Add(p2);
-
-            var p3 = CreatePanel(top, left += offset);
-            p3.Click += new EventHandler(p3_Click);
-            this.Controls.Add(p3);
-
-            var p4 = CreatePanel(top, left += offset);
-            p4.Click += new EventHandler(p4_Click);
-            this.Controls.Add(p4);
-
-            var p5 = CreatePanel(top, left += offset);
-            p5.Click += new EventHandler(p5_Click);
-            this.Controls.Add(p5);
-
-            var p6 = CreatePanel(top, left += offset);
-            p6.Click += new EventHandler(p6_Click);
-            this.Controls.Add(p6);
-
-            var p7 = CreatePanel(top, left += offset);
-            p7.Click += new EventHandler(p7_Click);
-            this.Controls.Add(p7);
-
-            var p8 = CreatePanel(top, left += offset);
-            p8.Click += new EventHandler(p8_Click);
-            this.Controls.Add(p8);
-
-            var p9 = CreatePanel(top, left += offset);
-            p9.Click += new EventHandler(p9_Click);
-            this.Controls.Add(p9);
-
-            var p10 = CreatePanel(top, left += offset);
-            p10.Click += new EventHandler(p10_Click);
-            this.Controls.Add(p10);
-
-            var p11 = CreatePanel(top, left += offset);
-            p11.Click += new EventHandler(p11_Click);
-            this.Controls.Add(p11);
-
-            var p12 = CreatePanel(top, left += offset);
-            p12.Click += new EventHandler(p12_Click);
-            this.Controls.Add(p12);
-
-            var p13 = CreatePanel(top, left += offset);
-            p13.Click += new EventHandler(p13_Click);
-            this.Controls.Add(p13);
-
-            var p14 = CreatePanel(top, left += offset);
-            p14.Click += new EventHandler(p14_Click);
-            this.Controls.Add(p14);
-
-            var p15 = CreatePanel(top, left += offset);
-            p15.Click += new EventHandler(p15_Click);
-            this.Controls.Add(p15);
-            #endregion
-
-            left = 16;
-            top = 60;
-
-            #region Row #2
-            var p16 = CreatePanel(top, left);
-            p16.Width = 67;
-            p16.Click += new EventHandler(p16_Click);
-            this.Controls.Add(p16);
-
-            var p17 = CreatePanel(top, left = left + offset + 30);
-            p17.Click += new EventHandler(p17_Click);
-            this.Controls.Add(p17);
-
-            var p18 = CreatePanel(top, left += offset);
-            p18.Click += new EventHandler(p18_Click);
-            this.Controls.Add(p18);
-
-            var p19 = CreatePanel(top, left += offset);
-            p19.Click += new EventHandler(p19_Click);
-            this.Controls.Add(p19);
-
-            var p20 = CreatePanel(top, left += offset);
-            p20.Click += new EventHandler(p20_Click);
-            this.Controls.Add(p20);
-
-            var p21 = CreatePanel(top, left += offset);
-            p21.Click += new EventHandler(p21_Click);
-            this.Controls.Add(p21);
-
-            var p22 = CreatePanel(top, left += offset);
-            p22.Click += new EventHandler(p22_Click);
-            this.Controls.Add(p22);
-
-            var p23 = CreatePanel(top, left += offset);
-            p23.Click += new EventHandler(p23_Click);
-            this.Controls.Add(p23);
-
-            var p24 = CreatePanel(top, left += offset);
-            p24.Click += new EventHandler(p24_Click);
-            this.Controls.Add(p24);
-
-            var p25 = CreatePanel(top, left += offset);
-            p25.Click += new EventHandler(p25_Click);
-            this.Controls.Add(p25);
-
-            var p26 = CreatePanel(top, left += offset);
-            p26.Click += new EventHandler(p26_Click);
-            this.Controls.Add(p26);
-
-            var p27 = CreatePanel(top, left += offset);
-            p27.Click += new EventHandler(p27_Click);
-            this.Controls.Add(p27);
-
-            var p28 = CreatePanel(top, left += offset);
-            p28.Click += new EventHandler(p28_Click);
-            this.Controls.Add(p28);
-
-            var p280 = CreatePanel(top, left += offset);
-            p280.Width = 60;
-            p280.Height = 50;
-            p280.Click += new EventHandler(p41_Click);
-            this.Controls.Add(p280);
-            #endregion
-
-            left = 16;
-            top = 105;
-
-            #region Row #3
-            var p29 = CreatePanel(top, left);
-            p29.Width = 75;
-            p29.Click += new EventHandler(CapsLock_Click);
-            this.Controls.Add(p29);
-
-            var p30 = CreatePanel(top, left += offset + 40);
-            p30.Click += new EventHandler(p30_Click);
-            this.Controls.Add(p30);
-
-            var p31 = CreatePanel(top, left += offset);
-            p31.Click += new EventHandler(p31_Click);
-            this.Controls.Add(p31);
-
-            var p32 = CreatePanel(top, left += offset);
-            p32.Click += new EventHandler(p32_Click);
-            this.Controls.Add(p32);
-
-            var p33 = CreatePanel(top, left += offset);
-            p33.Click += new EventHandler(p33_Click);
-            this.Controls.Add(p33);
-
-            var p34 = CreatePanel(top, left += offset);
-            p34.Click += new EventHandler(p34_Click);
-            this.Controls.Add(p34);
-
-            var p35 = CreatePanel(top, left += offset);
-            p35.Click += new EventHandler(p35_Click);
-            this.Controls.Add(p35);
-
-            var p36 = CreatePanel(top, left += offset);
-            p36.Click += new EventHandler(p36_Click);
-            this.Controls.Add(p36);
-
-            var p37 = CreatePanel(top, left += offset);
-            p37.Click += new EventHandler(p37_Click);
-            this.Controls.Add(p37);
-
-            var p38 = CreatePanel(top, left += offset);
-            p38.Click += new EventHandler(p38_Click);
-            this.Controls.Add(p38);
-
-            var p39 = CreatePanel(top, left += offset);
-            p39.Click += new EventHandler(p39_Click);
-            this.Controls.Add(p39);
-
-            var p40 = CreatePanel(top, left += offset);
-            p40.Click += new EventHandler(p40_Click);
-            this.Controls.Add(p40);
-
-            var p41 = CreatePanel(top, left += offset);
-            p41.Width = 90;
-            p41.Click += new EventHandler(p41_Click);
-            this.Controls.Add(p41);
-            #endregion
-
-            left = 124;
-            top = 150;
-
-            #region Row #4
-            var p411 = CreatePanel(top, 16);
-            p411.Width = 100;
-            p411.Click += new EventHandler(Shift_Click);
-            this.Controls.Add(p411);
-
-            var p42 = CreatePanel(top, left);
-            p42.Click += new EventHandler(p42_Click);
-            this.Controls.Add(p42);
-
-            var p43 = CreatePanel(top, left += offset);
-            p43.Click += new EventHandler(p43_Click);
-            this.Controls.Add(p43);
-
-            var p44 = CreatePanel(top, left += offset);
-            p44.Click += new EventHandler(p44_Click);
-            this.Controls.Add(p44);
-
-            var p45 = CreatePanel(top, left += offset);
-            p45.Click += new EventHandler(p45_Click);
-            this.Controls.Add(p45);
-
-            var p46 = CreatePanel(top, left += offset);
-            p46.Click += new EventHandler(p46_Click);
-            this.Controls.Add(p46);
-
-            var p47 = CreatePanel(top, left += offset);
-            p47.Click += new EventHandler(p47_Click);
-            this.Controls.Add(p47);
-
-            var p48 = CreatePanel(top, left += offset);
-            p48.Click += new EventHandler(p48_Click);
-            this.Controls.Add(p48);
-
-            var p49 = CreatePanel(top, left += offset);
-            p49.Click += new EventHandler(p49_Click);
-            this.Controls.Add(p49);
-
-            var p50 = CreatePanel(top, left += offset);
-            p50.Click += new EventHandler(p50_Click);
-            this.Controls.Add(p50);
-
-            var p51 = CreatePanel(top, left += offset);
-            p51.Click += new EventHandler(p51_Click);
-            this.Controls.Add(p51);
-
-            var p52 = CreatePanel(top, left += offset);
-            p52.Width = 120;
-            p52.Click += new EventHandler(Shift_Click);
-            this.Controls.Add(p52);
-            #endregion
-
-            left = 198;
-            top = 195;
-
-            #region Row #5
-            var p53 = CreatePanel(top, left);
-            p53.Width = 260;
-            p53.Click += new EventHandler(p53_Click);
-            this.Controls.Add(p53);
-            #endregion
-
-            pictureBox1.SendToBack();
-        }
-
-        private TransparentPanel CreatePanel(int top, int left)
-        {
-            var panel = new TransparentPanel();
-            panel.Width = 35;
-            panel.Height = 37;
-            panel.Top = top;
-            panel.Left = left;
-            panel.BackColor = Color.Red;
-            return panel;
-        }
-
-        
         private void btnCopy_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(
-                string.IsNullOrEmpty(textBox1.SelectedText) ? textBox1.Text : textBox1.SelectedText);
+            if (string.IsNullOrEmpty(textBox1.SelectedText))
+            {
+                if(!string.IsNullOrEmpty(textBox1.Text))
+                    Clipboard.SetText(textBox1.Text);
+            }
+            else
+            {
+                Clipboard.SetText(textBox1.SelectedText);
+            }
         }
 
         private void btnCut_Click(object sender, EventArgs e)
@@ -378,7 +190,8 @@ namespace RuOsk
             string text = trans.Trasliterate(
                 string.IsNullOrEmpty(textBox1.SelectedText) ? textBox1.Text : textBox1.SelectedText);
 
-            Clipboard.SetText(text);
+            if(!string.IsNullOrEmpty(text))
+                Clipboard.SetText(text);
         }
 
         private void btnTranslit_Resize(object sender, EventArgs e)
@@ -396,16 +209,108 @@ namespace RuOsk
             btnCopy.Text = (btnCopy.Width < 70) ? Labels.btnCopyShort : Labels.btnCopyLong;
         }
 
-        private void btnToggle_Click(object sender, EventArgs e)
+        //private void btnToggle_Click(object sender, EventArgs e)
+        //{
+        //    splitContainerMain.Panel2.Hide();
+        //    //splitContainerMain.SplitterDistance = 0;
+
+        //    Button button = (Button)sender;
+        //    button.Text = (button.Text == Labels.btnToggleHide) ? Labels.btnToggleShow : Labels.btnToggleHide;
+        //}
+
+        private void HandleKeyClick(string letter, EventArgs e)
         {
-            splitContainer1.Visible = !splitContainer1.Visible;
-
-            if (splitContainer1.Visible)
-                this.Height = pictureBox1.Height + splitContainer1.Height + 30;
+            string letter2 = "";
+            if (letter == "." && (CapsLockPressed || ShiftPressed))
+                letter2 = ",";
+            else if (CapsLockPressed || ShiftPressed)
+                letter2 = letter.ToUpper();
             else
-                this.Height = pictureBox1.Height + 25;
+                letter2 = letter;
 
-            btnTogglePanel.Text = splitContainer1.Visible ? Labels.btnToggleHide : Labels.btnToggleShow;
+            if (ShiftPressed)
+                ShiftPressed = false;
+
+            IntPtr theHandle = NativeWin32.GetForegroundWindow();
+            string windowText = "";
+            if (theHandle != IntPtr.Zero)
+            {
+                NativeWin32.SetForegroundWindow(theHandle);
+                windowText = NativeWin32.GetText(theHandle);
+
+                if (!string.IsNullOrEmpty(windowText) && windowText != Labels.AppName)
+                    this.Text = "Adding text to: " + windowText;
+                else
+                    this.Text = Labels.AppName;
+
+                SendKeys.Send(letter2);
+            }
+
+            if (windowText != Labels.AppName)
+            {
+                if (letter == "\b" && textBox1.Text.Length > 0)
+                    textBox1.Text = textBox1.Text.Substring(0, textBox1.Text.Length - 1);
+                else if (letter == "\n")
+                    textBox1.Text += "\r\n";
+                else if (letter != "\b")
+                    textBox1.Text += letter2;
+            }
+
+            // Scroll down!
+            if (textBox1.Text.Length > 1)
+            {
+                textBox1.Select(textBox1.Text.Length - 1, 0);
+                textBox1.ScrollToCaret();
+            }
+        }
+
+        private Button CreateButton(string text, Action<object, EventArgs> handler)
+        {
+            var button = new Button();
+            button.Text = text;
+
+            button.BackColor = System.Drawing.Color.FromArgb(100, 99, 99, 99);
+            button.ForeColor = System.Drawing.Color.White;
+            button.FlatStyle = FlatStyle.Flat;
+            button.FlatAppearance.BorderSize = 1;
+            button.FlatAppearance.BorderColor = System.Drawing.Color.White;
+
+            button.Font = new Font("Times New Roman", 12.0f, FontStyle.Regular);
+            button.Padding = new Padding(0);
+            button.Margin = new Padding(0);
+            button.Dock = DockStyle.Fill;
+
+            button.Click += new EventHandler(handler);
+
+            return button;
+        }
+
+        private Button CreateButton(string text)
+        {
+            return CreateButton(text, (sender, e) => { HandleKeyClick(((Button)sender).Text, e); });
+        }
+
+        private CheckBox CreateCheckbox(string text, Action<object, EventArgs> handler)
+        {
+            CheckBox checkBox1 = new System.Windows.Forms.CheckBox();
+            checkBox1.Appearance = System.Windows.Forms.Appearance.Button;
+
+            checkBox1.Text = text;
+
+            checkBox1.BackColor = System.Drawing.Color.FromArgb(100, 99, 99, 99);
+            checkBox1.ForeColor = System.Drawing.Color.White;
+            checkBox1.FlatStyle = FlatStyle.Flat;
+            checkBox1.FlatAppearance.BorderSize = 1;
+            checkBox1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+
+            checkBox1.Font = new Font("Times New Roman", 12.0f, FontStyle.Regular);
+            checkBox1.Padding = new Padding(0);
+            checkBox1.Margin = new Padding(0);
+            checkBox1.Dock = DockStyle.Fill;
+
+            checkBox1.Click += new EventHandler(handler);
+
+            return checkBox1;
         }
     }
 }

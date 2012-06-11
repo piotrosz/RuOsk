@@ -70,7 +70,7 @@ namespace RuOsk {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clear.
+        ///   Looks up a localized string similar to CLEAR.
         /// </summary>
         internal static string btnClearLong {
             get {
@@ -79,7 +79,7 @@ namespace RuOsk {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clr.
+        ///   Looks up a localized string similar to CLR.
         /// </summary>
         internal static string btnClearShort {
             get {
@@ -88,7 +88,7 @@ namespace RuOsk {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copy.
+        ///   Looks up a localized string similar to COPY.
         /// </summary>
         internal static string btnCopyLong {
             get {
@@ -97,7 +97,7 @@ namespace RuOsk {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cp.
+        ///   Looks up a localized string similar to CP.
         /// </summary>
         internal static string btnCopyShort {
             get {
@@ -106,7 +106,7 @@ namespace RuOsk {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cut.
+        ///   Looks up a localized string similar to CUT.
         /// </summary>
         internal static string btnCutLong {
             get {
@@ -115,7 +115,7 @@ namespace RuOsk {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hide.
+        ///   Looks up a localized string similar to HIDE.
         /// </summary>
         internal static string btnToggleHide {
             get {
@@ -124,7 +124,7 @@ namespace RuOsk {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show.
+        ///   Looks up a localized string similar to SHOW.
         /// </summary>
         internal static string btnToggleShow {
             get {
@@ -133,7 +133,7 @@ namespace RuOsk {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copy translit.
+        ///   Looks up a localized string similar to COPY TRANSLIT.
         /// </summary>
         internal static string btnTranslitLong {
             get {
@@ -142,7 +142,7 @@ namespace RuOsk {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ct.
+        ///   Looks up a localized string similar to CT.
         /// </summary>
         internal static string btnTranslitShort {
             get {

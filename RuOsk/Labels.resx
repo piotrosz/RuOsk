@@ -121,30 +121,30 @@
     <value>RuOsk</value>
   </data>
   <data name="btnClearLong" xml:space="preserve">
-    <value>Clear</value>
+    <value>CLEAR</value>
   </data>
   <data name="btnClearShort" xml:space="preserve">
-    <value>Clr</value>
+    <value>CLR</value>
   </data>
   <data name="btnCopyLong" xml:space="preserve">
-    <value>Copy</value>
+    <value>COPY</value>
   </data>
   <data name="btnCopyShort" xml:space="preserve">
-    <value>Cp</value>
+    <value>CP</value>
   </data>
   <data name="btnCutLong" xml:space="preserve">
-    <value>Cut</value>
+    <value>CUT</value>
   </data>
   <data name="btnToggleHide" xml:space="preserve">
-    <value>Hide</value>
+    <value>HIDE</value>
   </data>
   <data name="btnToggleShow" xml:space="preserve">
-    <value>Show</value>
+    <value>SHOW</value>
   </data>
   <data name="btnTranslitLong" xml:space="preserve">
-    <value>Copy translit</value>
+    <value>COPY TRANSLIT</value>
   </data>
   <data name="btnTranslitShort" xml:space="preserve">
-    <value>Ct</value>
+    <value>CT</value>
   </data>
 </root>
