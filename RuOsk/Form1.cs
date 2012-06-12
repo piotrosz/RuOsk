@@ -229,7 +229,7 @@ namespace RuOsk
                 windowText = NativeWin32.GetText(theHandle);
 
                 if (!string.IsNullOrEmpty(windowText) && windowText != Labels.AppName)
-                    this.Text = "Adding text to: " + windowText;
+                    this.Text = Labels.AppName + ": Adding text to " + windowText;
                 else
                     this.Text = Labels.AppName;
 
@@ -241,7 +241,15 @@ namespace RuOsk
                 else if (letter == "\b")
                     SendKeys.Send("{BACKSPACE}");
                 else if (letter == "\t")
-                    SendKeys.Send("");
+                    SendKeys.Send("{TAB}");
+                else if (letter == "(")
+                    SendKeys.Send("+9");
+                else if (letter == ")")
+                    SendKeys.Send("+0");
+                else if (letter == "+")
+                    SendKeys.Send("+=");
+                else if (letter == "%")
+                    SendKeys.Send("+5");
                 else
                     SendKeys.Send(letter);
             }
@@ -318,6 +326,10 @@ namespace RuOsk
             button.Margin = new Padding(0);
             button.Dock = DockStyle.Fill;
             button.AutoEllipsis = true;
+        }
+
+        private void Form1_Activated(object sender, EventArgs e)
+        {
         }
     }
 }
