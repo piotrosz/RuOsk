@@ -41,6 +41,8 @@ namespace RuOsk
         private static bool CapsLockPressed = false;
         private static bool ShiftPressed = false;
 
+        private static List<KeyboardButton> AllButtons = new List<KeyboardButton>();
+
         public Form1()
         {
             InitializeComponent();
@@ -57,25 +59,25 @@ namespace RuOsk
             AddButtons(keyboardRow1, new List<Control>()
             {
                 CreateButton("ё"),
-                CreateButton("1"),
-                CreateButton("2"),
-                CreateButton("3"),
-                CreateButton("4"),
-                CreateButton("5"),
-                CreateButton("6"), 
-                CreateButton("7"), 
-                CreateButton("8"), 
-                CreateButton("9"), 
-                CreateButton("0"), 
-                CreateButton("-"), 
-                CreateButton("="), 
+                CreateButton("1", "!"),
+                CreateButton("2", "\""),
+                CreateButton("3", "№"),
+                CreateButton("4", ";"),
+                CreateButton("5", "%"),
+                CreateButton("6", ":"), 
+                CreateButton("7", "?"), 
+                CreateButton("8", "*"), 
+                CreateButton("9", "("), 
+                CreateButton("0", ")"), 
+                CreateButton("-", "_"), 
+                CreateButton("=", "+"), 
                 CreateButton("\\"),
-                CreateButton("<-", (o, e) => { HandleKeyClick("\b", e); })
+                CreateButton("<-", "<-", (o, e) => { HandleKeyClick("\b", e); })
             });
 
             AddButtons(keyboardRow2, new List<Control>()
             {
-                CreateButton("TAB", (o, e) => { HandleKeyClick("\t", e); }),
+                CreateButton("TAB", "TAB", (o, e) => { HandleKeyClick("\t", e); }),
                 CreateButton("й"),
                 CreateButton("ц"),
                 CreateButton("у"),
@@ -92,7 +94,7 @@ namespace RuOsk
 
             AddButtons(keyboardRow3, new List<Control>()
             {
-                CreateCheckbox("CAPS LOCK", (o, e) => { CapsLockPressed = !CapsLockPressed; }),
+                CreateCheckbox("CAPS LOCK", (o, e) => { CapsLockPressed = !CapsLockPressed; ChangeKeyboardCase(); }),
                 CreateButton("ф"),
                 CreateButton("ы"),
                 CreateButton("в"),
@@ -104,12 +106,12 @@ namespace RuOsk
                 CreateButton("д"),
                 CreateButton("ж"),
                 CreateButton("э"),
-                CreateButton("ENTER", (o, e) => { HandleKeyClick("\n", e); }),
+                CreateButton("ENTER", "ENTER", (o, e) => { HandleKeyClick("\n", e); }),
             });
 
             AddButtons(keyboardRow4, new List<Control>()
             {
-                CreateButton("SHIFT", (o, e) => { ShiftPressed = true; }),
+                CreateButton("SHIFT", "SHIFT", (o, e) => { ShiftPressed = true; ChangeKeyboardCase(); }),
                 CreateButton("я"),
                 CreateButton("ч"),
                 CreateButton("с"),
@@ -119,15 +121,20 @@ namespace RuOsk
                 CreateButton("ь"),
                 CreateButton("б"),
                 CreateButton("ю"),
-                CreateButton("."),
-                CreateButton("SHIFT", (o, e) => { ShiftPressed = true; })
+                CreateButton(".", ","),
+                CreateButton("SHIFT", "SHIFT", (o, e) => { ShiftPressed = true; ChangeKeyboardCase(); })
             });
 
             AddButtons(keyboardRow5, new List<Control>()
             {
-                CreateButton("SPACE", (o, e) => { HandleKeyClick(" ", e); }),
-                //CreateButton(Labels.btnToggleHide, (o, e) => { btnToggle_Click(o, e); })
+                CreateButton("SPACE", "SPACE", (o, e) => { HandleKeyClick(" ", e); }),
             });
+        }
+
+        private void ChangeKeyboardCase()
+        {
+            foreach (var button in AllButtons)
+                button.ToggleCase();
         }
 
         private void AddButtons(TableLayoutPanel row, List<Control> list)
@@ -211,14 +218,6 @@ namespace RuOsk
 
         private void HandleKeyClick(string letter, EventArgs e)
         {
-            string letter2 = "";
-            if (letter == "." && (CapsLockPressed || ShiftPressed))
-                letter2 = ",";
-            else if (CapsLockPressed || ShiftPressed)
-                letter2 = letter.ToUpper();
-            else
-                letter2 = letter;
-
             if (ShiftPressed)
                 ShiftPressed = false;
 
@@ -234,7 +233,14 @@ namespace RuOsk
                 else
                     this.Text = Labels.AppName;
 
-                SendKeys.Send(letter2);
+                if (letter == "\n")
+                    SendKeys.Send("{ENTER}");
+                else if (letter == "\b")
+                    SendKeys.Send("{BACKSPACE}");
+                else if (letter == "\t")
+                    SendKeys.Send("");
+                else
+                    SendKeys.Send(letter);
             }
 
             if (windowText != Labels.AppName)
@@ -244,7 +250,7 @@ namespace RuOsk
                 else if (letter == "\n")
                     textBox1.Text += "\r\n";
                 else if (letter != "\b")
-                    textBox1.Text += letter2;
+                    textBox1.Text += letter;
             }
 
             // Scroll down!
@@ -255,54 +261,60 @@ namespace RuOsk
             }
         }
 
-        private Button CreateButton(string text, Action<object, EventArgs> handler)
+        private KeyboardButton CreateButton(string text, string shiftText, Action<object, EventArgs> handler)
         {
-            var button = new Button();
-            button.Text = text;
+            var button = new KeyboardButton();
+            button.LowerText = text;
+            button.ShiftText = shiftText;
 
+            SetCommonStyle(button);
+            button.Font = new Font("Courier", 13.0f, FontStyle.Regular);
+            
+            button.Click += new EventHandler(handler);
+
+            AllButtons.Add(button);
+
+            return button;
+        }
+
+        private KeyboardButton CreateButton(string text, string shiftText)
+        {
+            return CreateButton(text, shiftText, (sender, e) => { HandleKeyClick(((Button)sender).Text, e); });
+        }
+
+        private KeyboardButton CreateButton(string text)
+        {
+            return CreateButton(text, null);
+        }
+
+        private CheckBox CreateCheckbox(string text, Action<object, EventArgs> handler)
+        {
+            CheckBox checkBox1 = new System.Windows.Forms.CheckBox();
+            
+            checkBox1.Appearance = System.Windows.Forms.Appearance.Button;
+            checkBox1.Text = text;
+            checkBox1.Font = new Font("Courier", 10.0f, FontStyle.Regular);
+            checkBox1.FlatAppearance.CheckedBackColor = System.Drawing.Color.SlateGray;
+
+            SetCommonStyle(checkBox1);            
+
+            checkBox1.Click += new EventHandler(handler);
+
+            return checkBox1;
+        }
+
+        private void SetCommonStyle(ButtonBase button)
+        {
             button.BackColor = System.Drawing.Color.FromArgb(100, 99, 99, 99);
             button.ForeColor = System.Drawing.Color.White;
             button.FlatStyle = FlatStyle.Flat;
             button.FlatAppearance.BorderSize = 1;
             button.FlatAppearance.BorderColor = System.Drawing.Color.White;
 
-            button.Font = new Font("Courier", 13.0f, FontStyle.Regular);
             button.Padding = new Padding(0);
             button.Margin = new Padding(0);
             button.Dock = DockStyle.Fill;
-
-            button.Click += new EventHandler(handler);
-
-            return button;
-        }
-
-        private Button CreateButton(string text)
-        {
-            return CreateButton(text, (sender, e) => { HandleKeyClick(((Button)sender).Text, e); });
-        }
-
-        private CheckBox CreateCheckbox(string text, Action<object, EventArgs> handler)
-        {
-            CheckBox checkBox1 = new System.Windows.Forms.CheckBox();
-            checkBox1.Appearance = System.Windows.Forms.Appearance.Button;
-
-            checkBox1.Text = text;
-
-            checkBox1.BackColor = System.Drawing.Color.FromArgb(100, 99, 99, 99);
-            checkBox1.ForeColor = System.Drawing.Color.White;
-            checkBox1.FlatStyle = FlatStyle.Flat;
-            checkBox1.FlatAppearance.BorderSize = 1;
-            checkBox1.FlatAppearance.BorderColor = System.Drawing.Color.White;
-
-            checkBox1.Font = new Font("Times New Roman", 10.0f, FontStyle.Regular);
-            checkBox1.Padding = new Padding(0);
-            checkBox1.Margin = new Padding(0);
-            checkBox1.Dock = DockStyle.Fill;
-            checkBox1.AutoEllipsis = true;
-
-            checkBox1.Click += new EventHandler(handler);
-
-            return checkBox1;
+            button.AutoEllipsis = true;
         }
     }
 }

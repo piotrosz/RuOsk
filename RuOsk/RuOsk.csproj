@@ -52,6 +52,9 @@
     <Compile Include="Form1.designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="KeyboardButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Labels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
