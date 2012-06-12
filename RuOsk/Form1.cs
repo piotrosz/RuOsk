@@ -233,6 +233,9 @@ namespace RuOsk
                 else
                     this.Text = Labels.AppName;
 
+                // About SendKeys:
+                // http://msdn.microsoft.com/en-us/library/system.windows.forms.sendkeys.send.aspx
+
                 if (letter == "\n")
                     SendKeys.Send("{ENTER}");
                 else if (letter == "\b")
