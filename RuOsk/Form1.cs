@@ -209,15 +209,6 @@ namespace RuOsk
             btnCopy.Text = (btnCopy.Width < 70) ? Labels.btnCopyShort : Labels.btnCopyLong;
         }
 
-        //private void btnToggle_Click(object sender, EventArgs e)
-        //{
-        //    splitContainerMain.Panel2.Hide();
-        //    //splitContainerMain.SplitterDistance = 0;
-
-        //    Button button = (Button)sender;
-        //    button.Text = (button.Text == Labels.btnToggleHide) ? Labels.btnToggleShow : Labels.btnToggleHide;
-        //}
-
         private void HandleKeyClick(string letter, EventArgs e)
         {
             string letter2 = "";
@@ -275,7 +266,7 @@ namespace RuOsk
             button.FlatAppearance.BorderSize = 1;
             button.FlatAppearance.BorderColor = System.Drawing.Color.White;
 
-            button.Font = new Font("Times New Roman", 12.0f, FontStyle.Regular);
+            button.Font = new Font("Courier", 13.0f, FontStyle.Regular);
             button.Padding = new Padding(0);
             button.Margin = new Padding(0);
             button.Dock = DockStyle.Fill;
@@ -303,10 +294,11 @@ namespace RuOsk
             checkBox1.FlatAppearance.BorderSize = 1;
             checkBox1.FlatAppearance.BorderColor = System.Drawing.Color.White;
 
-            checkBox1.Font = new Font("Times New Roman", 12.0f, FontStyle.Regular);
+            checkBox1.Font = new Font("Times New Roman", 10.0f, FontStyle.Regular);
             checkBox1.Padding = new Padding(0);
             checkBox1.Margin = new Padding(0);
             checkBox1.Dock = DockStyle.Fill;
+            checkBox1.AutoEllipsis = true;
 
             checkBox1.Click += new EventHandler(handler);
 
