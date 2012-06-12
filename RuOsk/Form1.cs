@@ -219,7 +219,10 @@ namespace RuOsk
         private void HandleKeyClick(string letter, EventArgs e)
         {
             if (ShiftPressed)
+            {
                 ShiftPressed = false;
+                ChangeKeyboardCase();
+            }
 
             IntPtr theHandle = NativeWin32.GetForegroundWindow();
             string windowText = "";
