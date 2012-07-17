@@ -50,6 +50,10 @@ namespace RuOsk
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Empty context menu
+            // Context menu caused window to be focused
+            textBox1.ContextMenu = new System.Windows.Forms.ContextMenu();
+
             AddButtons();
             AssingLabels();
         }
@@ -231,7 +235,7 @@ namespace RuOsk
                 NativeWin32.SetForegroundWindow(theHandle);
                 windowText = NativeWin32.GetText(theHandle);
 
-                if (!string.IsNullOrEmpty(windowText) && windowText != Labels.AppName)
+                if (!string.IsNullOrEmpty(windowText) && windowText != Labels.AppName && windowText != "Program Manager")
                     this.Text = Labels.AppName + ": Adding text to " + windowText;
                 else
                     this.Text = Labels.AppName;
