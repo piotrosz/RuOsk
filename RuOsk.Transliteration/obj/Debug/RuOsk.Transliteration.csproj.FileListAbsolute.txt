@@ -1,0 +1,5 @@
+E:\prog\RuOsk\RuOsk.Transliteration\bin\Debug\RuOsk.Transliteration.dll
+E:\prog\RuOsk\RuOsk.Transliteration\bin\Debug\RuOsk.Transliteration.pdb
+E:\prog\RuOsk\RuOsk.Transliteration\obj\Debug\RuOsk.Transliteration.csprojResolveAssemblyReference.cache
+E:\prog\RuOsk\RuOsk.Transliteration\obj\Debug\RuOsk.Transliteration.dll
+E:\prog\RuOsk\RuOsk.Transliteration\obj\Debug\RuOsk.Transliteration.pdb

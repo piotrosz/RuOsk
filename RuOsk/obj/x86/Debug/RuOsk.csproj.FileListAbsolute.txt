@@ -1,0 +1,11 @@
+E:\prog\RuOsk\RuOsk\bin\Debug\RuOsk.exe
+E:\prog\RuOsk\RuOsk\bin\Debug\RuOsk.pdb
+E:\prog\RuOsk\RuOsk\bin\Debug\RuOsk.Transliteration.dll
+E:\prog\RuOsk\RuOsk\bin\Debug\RuOsk.Transliteration.pdb
+E:\prog\RuOsk\RuOsk\obj\x86\Debug\RuOsk.csprojResolveAssemblyReference.cache
+E:\prog\RuOsk\RuOsk\obj\x86\Debug\RuOsk.Form1.resources
+E:\prog\RuOsk\RuOsk\obj\x86\Debug\RuOsk.Labels.resources
+E:\prog\RuOsk\RuOsk\obj\x86\Debug\RuOsk.Properties.Resources.resources
+E:\prog\RuOsk\RuOsk\obj\x86\Debug\RuOsk.csproj.GenerateResource.Cache
+E:\prog\RuOsk\RuOsk\obj\x86\Debug\RuOsk.exe
+E:\prog\RuOsk\RuOsk\obj\x86\Debug\RuOsk.pdb
