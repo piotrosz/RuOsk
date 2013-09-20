@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -52,7 +52,7 @@ namespace RuOsk
 		{
 			// Empty context menu
 			// Context menu caused window to be focused
-			textBox1.ContextMenu = new System.Windows.Forms.ContextMenu();
+			textBox1.ContextMenu = new ContextMenu();
 
 			AddButtons();
 			AssingLabels();
@@ -60,7 +60,7 @@ namespace RuOsk
 
 		private void AddButtons()
 		{
-			AddButtons(keyboardRow1, new List<Control>()
+			AddButtons(keyboardRow1, new List<Control>
 			{
 				CreateButton("ё"),
 				CreateButton("1", "!"),
@@ -79,7 +79,7 @@ namespace RuOsk
 				CreateButton("<-", "<-", (o, e) => { HandleKeyClick("\b", e); })
 			});
 
-			AddButtons(keyboardRow2, new List<Control>()
+			AddButtons(keyboardRow2, new List<Control>
 			{
 				CreateButton("TAB", "TAB", (o, e) => { HandleKeyClick("\t", e); }),
 				CreateButton("й"),
@@ -96,7 +96,7 @@ namespace RuOsk
 				CreateButton("ъ")
 			});
 
-			AddButtons(keyboardRow3, new List<Control>()
+			AddButtons(keyboardRow3, new List<Control>
 			{
 				CreateCheckbox("CAPS LOCK", (o, e) => { ToggleCapsLock(); ChangeKeyboardCase(CapsLockPressed); }),
 				CreateButton("ф"),
@@ -113,7 +113,7 @@ namespace RuOsk
 				CreateButton("ENTER", "ENTER", (o, e) => { HandleKeyClick("\n", e); }),
 			});
 
-			AddButtons(keyboardRow4, new List<Control>()
+			AddButtons(keyboardRow4, new List<Control>
 			{
 				CreateButton("SHIFT", "SHIFT", (o, e) => { ShiftPressed = true; if(!CapsLockPressed) ChangeKeyboardCase(true); }),
 				CreateButton("я"),
@@ -129,7 +129,7 @@ namespace RuOsk
 				CreateButton("SHIFT", "SHIFT", (o, e) => { ShiftPressed = true; if(!CapsLockPressed) ChangeKeyboardCase(true); })
 			});
 
-			AddButtons(keyboardRow5, new List<Control>()
+			AddButtons(keyboardRow5, new List<Control>
 			{
 				CreateButton("SPACE", "SPACE", (o, e) => { HandleKeyClick(" ", e); }),
 			});
@@ -138,7 +138,9 @@ namespace RuOsk
 		private void ChangeKeyboardCase(bool upper)
 		{
 			foreach (var button in AllButtons)
+			{
 				button.ToggleCase(upper);
+			}
 		}
 
 		private void ToggleCapsLock()
@@ -149,7 +151,9 @@ namespace RuOsk
 		private void AddButtons(TableLayoutPanel row, List<Control> list)
 		{
 			for (int i = 0; i < list.Count; i++)
+			{
 				row.Controls.Add(list[i], i, 0);
+			}
 		}
 
 		private void AssingLabels()
@@ -158,7 +162,6 @@ namespace RuOsk
 			btnCopy.Text = Labels.btnCopyLong;
 			btnCut.Text = Labels.btnCutLong;
 			btnClear.Text = Labels.btnClearLong;
-			//btnTogglePanel.Text = Labels.btnToggleHide;
 		}
 
 		private void btnCopy_Click(object sender, EventArgs e)
@@ -166,7 +169,9 @@ namespace RuOsk
 			if (string.IsNullOrEmpty(textBox1.SelectedText))
 			{
 				if(!string.IsNullOrEmpty(textBox1.Text))
+				{
 					Clipboard.SetText(textBox1.Text);
+				}
 			}
 			else
 			{
@@ -194,20 +199,25 @@ namespace RuOsk
 		private void btnClear_Click(object sender, EventArgs e)
 		{
 			if (string.IsNullOrEmpty(textBox1.SelectedText))
+			{
 				textBox1.Text = "";
+			}
 			else
+			{
 				textBox1.SelectedText = "";
+			}
 		}
 
 		private void btnTranslit_Click(object sender, EventArgs e)
 		{
 			var trans = new Engine(new Transliteration_En());
 
-			string text = trans.Trasliterate(
-				string.IsNullOrEmpty(textBox1.SelectedText) ? textBox1.Text : textBox1.SelectedText);
+			string text = trans.Trasliterate(string.IsNullOrEmpty(textBox1.SelectedText) ? textBox1.Text : textBox1.SelectedText);
 
 			if(!string.IsNullOrEmpty(text))
+			{
 				Clipboard.SetText(text);
+			}
 		}
 
 		private void btnTranslit_Resize(object sender, EventArgs e)
@@ -241,39 +251,59 @@ namespace RuOsk
 				windowText = NativeWin32.GetText(theHandle);
 
 				if (!string.IsNullOrEmpty(windowText) && windowText != Labels.AppName && windowText != "Program Manager")
+				{
 					this.Text = Labels.AppName + ": Adding text to " + windowText;
+				}
 				else
+				{
 					this.Text = Labels.AppName;
+				}
 
 				// About SendKeys:
 				// http://msdn.microsoft.com/en-us/library/system.windows.forms.sendkeys.send.aspx
-
-				if (letter == "\n")
-					SendKeys.Send("{ENTER}");
-				else if (letter == "\b")
-					SendKeys.Send("{BACKSPACE}");
-				else if (letter == "\t")
-					SendKeys.Send("{TAB}");
-				else if (letter == "(")
-					SendKeys.Send("+9");
-				else if (letter == ")")
-					SendKeys.Send("+0");
-				else if (letter == "+")
-					SendKeys.Send("+=");
-				else if (letter == "%")
-					SendKeys.Send("+5");
-				else
-					SendKeys.Send(letter);
+				switch(letter)
+				{
+					case "\n":
+						SendKeys.Send("{ENTER}");
+						break;
+					case "\b":
+						SendKeys.Send("{BACKSPACE}");
+						break;
+					case "\t":
+						SendKeys.Send("{TAB}");
+						break;
+					case "(":
+						SendKeys.Send("+9");
+						break;
+					case ")":
+						SendKeys.Send("+0");
+						break;
+					case "+":
+						SendKeys.Send("+=");
+						break;
+					case "%":
+						SendKeys.Send("+5");
+						break;
+					default :
+						SendKeys.Send(letter);
+						break;
+				}
 			}
 
 			if (windowText != Labels.AppName)
 			{
 				if (letter == "\b" && textBox1.Text.Length > 0)
+				{
 					textBox1.Text = textBox1.Text.Substring(0, textBox1.Text.Length - 1);
+				}
 				else if (letter == "\n")
+				{
 					textBox1.Text += "\r\n";
+				}
 				else if (letter != "\b")
+				{
 					textBox1.Text += letter;
+				}
 			}
 
 			// Scroll down!
@@ -312,7 +342,7 @@ namespace RuOsk
 
 		private CheckBox CreateCheckbox(string text, Action<object, EventArgs> handler)
 		{
-			CheckBox checkBox1 = new System.Windows.Forms.CheckBox();
+			var checkBox1 = new CheckBox();
 			
 			checkBox1.Appearance = System.Windows.Forms.Appearance.Button;
 			checkBox1.Text = text;
@@ -328,20 +358,16 @@ namespace RuOsk
 
 		private void SetCommonStyle(ButtonBase button)
 		{
-			button.BackColor = System.Drawing.Color.FromArgb(100, 99, 99, 99);
-			button.ForeColor = System.Drawing.Color.White;
+			button.BackColor = Color.FromArgb(100, 99, 99, 99);
+			button.ForeColor = Color.White;
 			button.FlatStyle = FlatStyle.Flat;
 			button.FlatAppearance.BorderSize = 1;
-			button.FlatAppearance.BorderColor = System.Drawing.Color.White;
+			button.FlatAppearance.BorderColor = Color.White;
 
 			button.Padding = new Padding(0);
 			button.Margin = new Padding(0);
 			button.Dock = DockStyle.Fill;
 			button.AutoEllipsis = true;
-		}
-
-		private void Form1_Activated(object sender, EventArgs e)
-		{
 		}
 	}
 }
