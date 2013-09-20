@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,13 +12,7 @@ namespace RuOsk
 		
 		public string ShiftText 
 		{ 
-			get
-			{
-				if (!string.IsNullOrEmpty(shiftText))
-					return this.shiftText;
-				else
-					return this.lowerText.ToUpper();
-			}
+			get { return string.IsNullOrEmpty(shiftText) ? this.lowerText.ToUpper() : this.shiftText }
 			set { shiftText = value; }
 		}
 
@@ -34,12 +28,16 @@ namespace RuOsk
 			}
 		}
 
-		public void ToggleCase(bool upper)
+		public void ToggleCase(bool isUpperCase)
 		{
-			if (upper)
+			if (isUpperCase)
+			{
 				this.Text = ShiftText;
+			}
 			else
+			{
 				this.Text = LowerText;
+			}
 		}
 	}
 }
