@@ -322,7 +322,6 @@
             this.ShowInTaskbar = false;
             this.Text = "RuOsk";
             this.TopMost = true;
-            this.Activated += new System.EventHandler(this.Form1_Activated);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.splitContainerBottom.Panel1.ResumeLayout(false);
             this.splitContainerBottom.Panel1.PerformLayout();

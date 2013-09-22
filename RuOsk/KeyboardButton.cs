@@ -8,36 +8,29 @@ namespace RuOsk
 {
 	public class KeyboardButton : Button
 	{
-		private string shiftText = null;
+		private string upperCaseText;
 		
-		public string ShiftText 
-		{ 
-			get { return string.IsNullOrEmpty(shiftText) ? this.lowerText.ToUpper() : this.shiftText }
-			set { shiftText = value; }
+		public string UpperCaseText 
+		{
+            get { return string.IsNullOrEmpty(upperCaseText) ? this.lowerCaseText.ToUpper() : this.upperCaseText; }
+			set { upperCaseText = value; }
 		}
 
-		private string lowerText = null;
+		private string lowerCaseText;
 
-		public string LowerText 
+		public string LowerCaseText 
 		{
-			get { return lowerText; }
+			get { return lowerCaseText; }
 			set 
 			{ 
-				this.lowerText = value;
+				this.lowerCaseText = value;
 				this.Text = value;
 			}
 		}
 
 		public void ToggleCase(bool isUpperCase)
 		{
-			if (isUpperCase)
-			{
-				this.Text = ShiftText;
-			}
-			else
-			{
-				this.Text = LowerText;
-			}
+            this.Text = isUpperCase ? UpperCaseText : LowerCaseText;
 		}
 	}
 }
