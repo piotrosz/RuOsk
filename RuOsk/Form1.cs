@@ -43,7 +43,7 @@ namespace RuOsk
 			textBox1.ContextMenu = new ContextMenu();
 
             _keyboardManager = new KeyboardManager(
-                new List<TableLayoutPanel> { this.keyboardRow1, this.keyboardRow2, this.keyboardRow3, this.keyboardRow4, this.keyboardRow5 },
+                new List<TableLayoutPanel> { keyboardRow1, keyboardRow2, keyboardRow3, keyboardRow4, keyboardRow5 },
                 this,
                 textBox1);
 

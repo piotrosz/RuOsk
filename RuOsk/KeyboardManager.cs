@@ -98,7 +98,7 @@ namespace RuOsk
 
             AddButtons(_keyboardRows[3], new List<Control>
 			{
-				CreateButton("SHIFT", "SHIFT", (o, e) => { _shiftPressed = true; if(!_capsLockPressed) ChangeKeyboardCase(true); }),
+				CreateButton("SHIFT", "SHIFT", ShiftHandler),
 				CreateButton("я"),
 				CreateButton("ч"),
 				CreateButton("с"),
@@ -109,13 +109,22 @@ namespace RuOsk
 				CreateButton("б"),
 				CreateButton("ю"),
 				CreateButton(".", ","),
-				CreateButton("SHIFT", "SHIFT", (o, e) => { _shiftPressed = true; if(!_capsLockPressed) ChangeKeyboardCase(true); })
+				CreateButton("SHIFT", "SHIFT", ShiftHandler)
 			});
 
             AddButtons(_keyboardRows[4], new List<Control>
 			{
 				CreateButton("SPACE", "SPACE", (o, e) => HandleKeyClick(" ", e)),
 			});
+        }
+
+        private void ShiftHandler(object sender, EventArgs e)
+        {
+            if (!_capsLockPressed)
+            {
+                _shiftPressed = !_shiftPressed;
+                ChangeKeyboardCase(_shiftPressed);
+            } 
         }
 
         private void AddButtons(TableLayoutPanel row, List<Control> list)

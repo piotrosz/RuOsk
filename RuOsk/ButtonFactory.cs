@@ -28,7 +28,7 @@ namespace RuOsk
                 {
                     Appearance = Appearance.Button,
                     Text = text,
-                    Font = new Font("Courier", 10.0f, FontStyle.Regular)
+                    Font = new Font("Courier", 10.0f, FontStyle.Bold)
                 };
 
             checkBox1.FlatAppearance.CheckedBackColor = Color.SlateGray;
