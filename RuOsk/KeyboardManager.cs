@@ -1,34 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace RuOsk
 {
     internal sealed class KeyboardManager
     {
-        private static bool CapsLockPressed = false;
-        private static bool ShiftPressed = false;
+        private static bool _capsLockPressed;
+        private static bool _shiftPressed;
 
-        private ButtonFactory buttonFactory = new ButtonFactory();
-        private static List<KeyboardButton> AllButtons = new List<KeyboardButton>();
-        private Form form;
-        private TextBox textBox;
-        private List<TableLayoutPanel> kbRows;
+        private readonly ButtonFactory _buttonFactory = new ButtonFactory();
+        private static readonly List<KeyboardButton> AllButtons = new List<KeyboardButton>();
+        private readonly Form _form;
+        private readonly TextBox _textBox;
+        private readonly List<TableLayoutPanel> _keyboardRows;
 
         public KeyboardManager(List<TableLayoutPanel> kbRows, Form form, TextBox textBox)
         {
             Debug.Assert(kbRows.Count == 5);
-            this.kbRows = kbRows;
-            this.form = form;
-            this.textBox = textBox;
+            _keyboardRows = kbRows;
+            _form = form;
+            _textBox = textBox;
         }
 
         public KeyboardButton CreateButton(string lowerCaseText, string upperCaseText)
         {
-            return CreateButton(lowerCaseText, upperCaseText, (sender, e) => { HandleKeyClick(((Button)sender).Text, e); });
+            return CreateButton(lowerCaseText, upperCaseText, (sender, e) => HandleKeyClick(((Button)sender).Text, e));
         }
 
         public KeyboardButton CreateButton(string lowerCaseText)
@@ -38,14 +36,14 @@ namespace RuOsk
 
         public KeyboardButton CreateButton(string lowerCaseText, string upperCaseText, Action<object, EventArgs> handler)
         {
-            var button = buttonFactory.CreateButton(lowerCaseText, upperCaseText, handler);
+            var button = _buttonFactory.CreateButton(lowerCaseText, upperCaseText, handler);
             AllButtons.Add(button);
             return button;
         }
 
         public void AddButtons()
         {
-            AddButtons(kbRows[0], new List<Control>
+            AddButtons(_keyboardRows[0], new List<Control>
 			{
 				CreateButton("ё"),
 				CreateButton("1", "!"),
@@ -61,12 +59,12 @@ namespace RuOsk
 				CreateButton("-", "_"), 
 				CreateButton("=", "+"), 
 				CreateButton("\\"),
-				CreateButton("<-", "<-", (o, e) => { HandleKeyClick("\b", e); })
+				CreateButton("<-", "<-", (o, e) => HandleKeyClick("\b", e))
 			});
 
-            AddButtons(kbRows[1], new List<Control>
+            AddButtons(_keyboardRows[1], new List<Control>
 			{
-				CreateButton("TAB", "TAB", (o, e) => { HandleKeyClick("\t", e); }),
+				CreateButton("TAB", "TAB", (o, e) => HandleKeyClick("\t", e)),
 				CreateButton("й"),
 				CreateButton("ц"),
 				CreateButton("у"),
@@ -81,9 +79,9 @@ namespace RuOsk
 				CreateButton("ъ")
 			});
 
-            AddButtons(kbRows[2], new List<Control>
+            AddButtons(_keyboardRows[2], new List<Control>
 			{
-				buttonFactory.CreateCheckbox("CAPS LOCK", (o, e) => { CapsLockPressed = !CapsLockPressed; ChangeKeyboardCase(CapsLockPressed); }),
+				_buttonFactory.CreateCheckbox("CAPS LOCK", (o, e) => { _capsLockPressed = !_capsLockPressed; ChangeKeyboardCase(_capsLockPressed); }),
 				CreateButton("ф"),
 				CreateButton("ы"),
 				CreateButton("в"),
@@ -95,12 +93,12 @@ namespace RuOsk
 				CreateButton("д"),
 				CreateButton("ж"),
 				CreateButton("э"),
-				CreateButton("ENTER", "ENTER", (o, e) => { HandleKeyClick("\n", e); }),
+				CreateButton("ENTER", "ENTER", (o, e) => HandleKeyClick("\n", e)),
 			});
 
-            AddButtons(kbRows[3], new List<Control>
+            AddButtons(_keyboardRows[3], new List<Control>
 			{
-				CreateButton("SHIFT", "SHIFT", (o, e) => { ShiftPressed = true; if(!CapsLockPressed) ChangeKeyboardCase(true); }),
+				CreateButton("SHIFT", "SHIFT", (o, e) => { _shiftPressed = true; if(!_capsLockPressed) ChangeKeyboardCase(true); }),
 				CreateButton("я"),
 				CreateButton("ч"),
 				CreateButton("с"),
@@ -111,12 +109,12 @@ namespace RuOsk
 				CreateButton("б"),
 				CreateButton("ю"),
 				CreateButton(".", ","),
-				CreateButton("SHIFT", "SHIFT", (o, e) => { ShiftPressed = true; if(!CapsLockPressed) ChangeKeyboardCase(true); })
+				CreateButton("SHIFT", "SHIFT", (o, e) => { _shiftPressed = true; if(!_capsLockPressed) ChangeKeyboardCase(true); })
 			});
 
-            AddButtons(kbRows[4], new List<Control>
+            AddButtons(_keyboardRows[4], new List<Control>
 			{
-				CreateButton("SPACE", "SPACE", (o, e) => { HandleKeyClick(" ", e); }),
+				CreateButton("SPACE", "SPACE", (o, e) => HandleKeyClick(" ", e)),
 			});
         }
 
@@ -135,9 +133,9 @@ namespace RuOsk
 
         private void HandleKeyClick(string character, EventArgs e)
         {
-            if (ShiftPressed && !CapsLockPressed)
+            if (_shiftPressed && !_capsLockPressed)
             {
-                ShiftPressed = false;
+                _shiftPressed = false;
                 ChangeKeyboardCase(false);
             }
 
@@ -152,25 +150,25 @@ namespace RuOsk
 
             if (windowText != Labels.AppName)
             {
-                if (character == "\b" && textBox.Text.Length > 0)
+                if (character == "\b" && _textBox.Text.Length > 0)
                 {
-                    textBox.Text = textBox.Text.Substring(0, textBox.Text.Length - 1);
+                    _textBox.Text = _textBox.Text.Substring(0, _textBox.Text.Length - 1);
                 }
                 else if (character == "\n")
                 {
-                    textBox.Text += "\r\n";
+                    _textBox.Text += "\r\n";
                 }
                 else if (character != "\b")
                 {
-                    textBox.Text += character;
+                    _textBox.Text += character;
                 }
             }
 
             // Scroll down!
-            if (textBox.Text.Length > 1)
+            if (_textBox.Text.Length > 1)
             {
-                textBox.Select(textBox.Text.Length - 1, 0);
-                textBox.ScrollToCaret();
+                _textBox.Select(_textBox.Text.Length - 1, 0);
+                _textBox.ScrollToCaret();
             }
         }
 
@@ -182,11 +180,11 @@ namespace RuOsk
 
             if (!string.IsNullOrEmpty(windowText) && windowText != Labels.AppName && windowText != "Program Manager")
             {
-                form.Text = Labels.AppName + ": Adding text to " + windowText;
+                _form.Text = Labels.AppName + ": Adding text to " + windowText;
             }
             else
             {
-                form.Text = Labels.AppName;
+                _form.Text = Labels.AppName;
             }
 
             return windowText;

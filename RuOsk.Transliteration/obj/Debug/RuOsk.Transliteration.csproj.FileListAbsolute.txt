@@ -3,3 +3,8 @@ E:\prog\RuOsk\RuOsk.Transliteration\bin\Debug\RuOsk.Transliteration.pdb
 E:\prog\RuOsk\RuOsk.Transliteration\obj\Debug\RuOsk.Transliteration.csprojResolveAssemblyReference.cache
 E:\prog\RuOsk\RuOsk.Transliteration\obj\Debug\RuOsk.Transliteration.dll
 E:\prog\RuOsk\RuOsk.Transliteration\obj\Debug\RuOsk.Transliteration.pdb
+C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk.Transliteration\bin\Debug\RuOsk.Transliteration.dll
+C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk.Transliteration\bin\Debug\RuOsk.Transliteration.pdb
+C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk.Transliteration\obj\Debug\RuOsk.Transliteration.csprojResolveAssemblyReference.cache
+C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk.Transliteration\obj\Debug\RuOsk.Transliteration.dll
+C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk.Transliteration\obj\Debug\RuOsk.Transliteration.pdb

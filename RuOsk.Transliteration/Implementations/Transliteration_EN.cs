@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using RuOsk.Transliteration.Interfaces;
 
 namespace RuOsk.Transliteration.Implementations
 {
     public class Transliteration_En : ITransliteration
     {
-        private static Dictionary<string, string> _Dictionary;
-        private static Dictionary<string, string> _DictionaryReversed;
+        private static Dictionary<string, string> _dictionary;
+        private static Dictionary<string, string> _dictionaryReversed;
 
         public Transliteration_En()
         {
-            _Dictionary = new Dictionary<string, string>() 
+            _dictionary = new Dictionary<string, string>() 
             { 
                 { "а", "a" },
                 { "б", "b" },
@@ -50,16 +48,16 @@ namespace RuOsk.Transliteration.Implementations
                 { "я", "ya" },
             };
 
-            _DictionaryReversed = new Dictionary<string, string>();
+            _dictionaryReversed = new Dictionary<string, string>();
 
-            foreach (KeyValuePair<string, string> kvp in _Dictionary)
+            foreach (KeyValuePair<string, string> kvp in _dictionary)
             {
                 if(kvp.Value != "y" && kvp.Value != "e")
-                    _DictionaryReversed.Add(kvp.Value, kvp.Key);
+                    _dictionaryReversed.Add(kvp.Value, kvp.Key);
             }
 
-            _DictionaryReversed.Add("y", "[ы/й]");
-            _DictionaryReversed.Add("e", "[е/э]");
+            _dictionaryReversed.Add("y", "[ы/й]");
+            _dictionaryReversed.Add("e", "[е/э]");
         }
 
         public string Name
@@ -74,7 +72,7 @@ namespace RuOsk.Transliteration.Implementations
 
         public Dictionary<string, string> Dictionary
         {
-            get { return _Dictionary; }
+            get { return _dictionary; }
         }
 
         public Dictionary<string, string> DictionaryReversed

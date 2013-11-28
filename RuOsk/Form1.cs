@@ -1,16 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using System.Globalization;
 using RuOsk.Transliteration.Implementations;
 using TransliterationRU.Engine;
-using RuOsk.Properties;
 
 namespace RuOsk
 {
@@ -38,7 +30,7 @@ namespace RuOsk
 			}
 		}
 
-        private KeyboardManager keyboardManager;
+        private KeyboardManager _keyboardManager;
             
 		public Form1()
 		{            
@@ -47,16 +39,15 @@ namespace RuOsk
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			// Empty context menu
-			// Context menu caused window to be focused
+			// Context menu must be empty. Standard context menu causes window to get focused
 			textBox1.ContextMenu = new ContextMenu();
 
-            keyboardManager = new KeyboardManager(
+            _keyboardManager = new KeyboardManager(
                 new List<TableLayoutPanel> { this.keyboardRow1, this.keyboardRow2, this.keyboardRow3, this.keyboardRow4, this.keyboardRow5 },
                 this,
                 textBox1);
 
-			keyboardManager.AddButtons();
+			_keyboardManager.AddButtons();
 
             btnTranslit.Text = Labels.btnTranslitLong;
             btnCopy.Text = Labels.btnCopyLong;

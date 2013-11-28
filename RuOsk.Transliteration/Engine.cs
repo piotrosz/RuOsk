@@ -1,42 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using RuOsk.Transliteration.Interfaces;
 
 namespace TransliterationRU.Engine
 {
     public class Engine
     {
-        private ITransliteration _Transliteration;
+        private readonly ITransliteration _transliteration;
 
         public Engine(ITransliteration transliteration)
         {
-            this._Transliteration = transliteration;
+            _transliteration = transliteration;
         }
 
         public string Trasliterate(string text)
         {
-            foreach (string key in _Transliteration.Dictionary.Keys)
-                text = text.Replace(key, _Transliteration.Dictionary[key]);
+            text = _transliteration.Dictionary.Keys.Aggregate(text, (current, key) => current.Replace(key, _transliteration.Dictionary[key]));
 
-            foreach (string key in _Transliteration.Dictionary.Keys)
-                text = text.Replace(key.ToUpper(), _Transliteration.Dictionary[key].ToUpper());
-            
-            return text;
+            return _transliteration.Dictionary.Keys.Aggregate(text, (current, key) => current.Replace(key.ToUpper(), _transliteration.Dictionary[key].ToUpper()));
         }
 
 
         public string TransliterateReverse(string text)
         {
-            foreach (string key in _Transliteration.DictionaryReversed.Keys)
-                text = text.Replace(key, _Transliteration.DictionaryReversed[key]);
+            text = _transliteration.DictionaryReversed.Keys.Aggregate(text, (current, key) => current.Replace(key, _transliteration.DictionaryReversed[key]));
 
-            foreach (string key in _Transliteration.DictionaryReversed.Keys)
-                text = text.Replace(key.ToUpper(), _Transliteration.DictionaryReversed[key].ToUpper());
-
-
-            return text;
+            return _transliteration.DictionaryReversed.Keys.Aggregate(text, (current, key) => current.Replace(key.ToUpper(), _transliteration.DictionaryReversed[key].ToUpper()));
         }
     }
 }

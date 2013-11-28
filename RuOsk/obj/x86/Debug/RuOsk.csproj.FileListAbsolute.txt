@@ -9,3 +9,14 @@ E:\prog\RuOsk\RuOsk\obj\x86\Debug\RuOsk.Properties.Resources.resources
 E:\prog\RuOsk\RuOsk\obj\x86\Debug\RuOsk.csproj.GenerateResource.Cache
 E:\prog\RuOsk\RuOsk\obj\x86\Debug\RuOsk.exe
 E:\prog\RuOsk\RuOsk\obj\x86\Debug\RuOsk.pdb
+C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk\obj\x86\Debug\RuOsk.exe
+C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk\obj\x86\Debug\RuOsk.pdb
+C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk\bin\Debug\RuOsk.exe
+C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk\bin\Debug\RuOsk.pdb
+C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk\bin\Debug\RuOsk.Transliteration.dll
+C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk\bin\Debug\RuOsk.Transliteration.pdb
+C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk\obj\x86\Debug\RuOsk.csprojResolveAssemblyReference.cache
+C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk\obj\x86\Debug\RuOsk.Form1.resources
+C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk\obj\x86\Debug\RuOsk.Labels.resources
+C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk\obj\x86\Debug\RuOsk.Properties.Resources.resources
+C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk\obj\x86\Debug\RuOsk.csproj.GenerateResource.Cache

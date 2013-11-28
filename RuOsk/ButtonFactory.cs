@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace RuOsk
@@ -27,11 +24,13 @@ namespace RuOsk
 
         public CheckBox CreateCheckbox(string text, Action<object, EventArgs> handler)
         {
-            var checkBox1 = new CheckBox();
+            var checkBox1 = new CheckBox
+                {
+                    Appearance = Appearance.Button,
+                    Text = text,
+                    Font = new Font("Courier", 10.0f, FontStyle.Regular)
+                };
 
-            checkBox1.Appearance = Appearance.Button;
-            checkBox1.Text = text;
-            checkBox1.Font = new Font("Courier", 10.0f, FontStyle.Regular);
             checkBox1.FlatAppearance.CheckedBackColor = Color.SlateGray;
 
             SetCommonStyle(checkBox1);
