@@ -340,6 +340,7 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
+		<row><td>ISX_DEFAULTCOMPONENT</td><td>{52D63190-8F41-41D6-BCE8-C6187C82B236}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>RuOsk.Primary_output</td><td>{57644877-C540-4424-9EE9-D922DB079955}</td><td>INSTALLDIR</td><td>2</td><td/><td>ruosk.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>RuOsk.Transliteration.Primary_output</td><td>{1C261A3C-F14E-470B-969D-F0D9F9AF95F9}</td><td>INSTALLDIR</td><td>2</td><td/><td>ruosk.transliteration.primar</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
@@ -1864,6 +1865,7 @@
 	<table name="FeatureComponents">
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>AlwaysInstall</td><td>RuOsk.Primary_output</td></row>
 		<row><td>AlwaysInstall</td><td>RuOsk.Transliteration.Primary_output</td></row>
 	</table>
@@ -1880,6 +1882,7 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
+		<row><td>icon.ico</td><td>ISX_DEFAULTCOMPONENT</td><td>icon.ico</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\p.ludwiczuk\Documents\GitHub\RuOsk\RuOsk\images\icon.ico</td><td>1</td><td/></row>
 		<row><td>ruosk.primary_output</td><td>RuOsk.Primary_output</td><td>RuOsk.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;RuOsk&gt;|Built</td><td>3</td><td/></row>
 		<row><td>ruosk.transliteration.primar</td><td>RuOsk.Transliteration.Primary_output</td><td>RuOsk.Transliteration.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;RuOsk.Transliteration&gt;|Built</td><td>3</td><td/></row>
 	</table>
@@ -2025,6 +2028,7 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
+		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_E0BDD655_3025_4B59_BF5F_3DF07799E585_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>RuOsk.Primary_output</td><td/><td/><td>_FF0A938A_EA18_43C8_B30D_37694C7B2E91_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>RuOsk.Transliteration.Primary_output</td><td/><td/><td>_92638E1A_AEE7_47B5_9969_427F2AF1F6B3_FILTER</td><td/><td/><td/><td/></row>
 	</table>
@@ -3458,7 +3462,7 @@
 		<row><td>IDS_PROGMSG_XML_UPDATE_FILE</td><td>1033</td><td>Updating XML file %s...</td><td>0</td><td/><td>371286414</td></row>
 		<row><td>IDS_SETUPEXE_EXPIRE_MSG</td><td>1033</td><td>This setup works until %s. The setup will now exit.</td><td>0</td><td/><td>371286414</td></row>
 		<row><td>IDS_SETUPEXE_LAUNCH_COND_E</td><td>1033</td><td>This setup was built with an evaluation version of InstallShield and can only be launched from setup.exe.</td><td>0</td><td/><td>371286414</td></row>
-		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>371290702</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>RuOsk</td><td>0</td><td/><td>371307598</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>1033</td><td>From the list of servers below, select the database server you would like to target.</td><td>0</td><td/><td>371286414</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>1033</td><td>From the list of catalog names below, select the database catalog you would like to target.</td><td>0</td><td/><td>371286414</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>1033</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>371286414</td></row>
@@ -3750,6 +3754,8 @@
 		<row><td>ID_STRING1</td><td>1033</td><td>http://www.piotrludwiczuk.net</td><td>0</td><td/><td>371304878</td></row>
 		<row><td>ID_STRING2</td><td>1033</td><td>Piotr Ludwiczuk</td><td>0</td><td/><td>371313038</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>371294798</td></row>
+		<row><td>ID_STRING4</td><td>1033</td><td>RuOsk</td><td>0</td><td/><td>371270670</td></row>
+		<row><td>ID_STRING5</td><td>1033</td><td>RuOsk</td><td>0</td><td/><td>371301454</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>371286414</td></row>
 	</table>
 
@@ -3857,7 +3863,9 @@
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
-		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;VSSolutionFolder&gt;\icon.ico</td><td>0</td></row>
+		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;VSSolutionFolder&gt;\RuOsk\images\icon.ico</td><td>0</td></row>
+		<row><td>_Built1_3E45749727A1439984E043B3E07CF45A.exe</td><td/><td>&lt;VSSolutionFolder&gt;\RuOsk\images\icon.ico</td><td>0</td></row>
+		<row><td>_Built_77A69206DEBD4869BE47DAEBB2D9E880.exe</td><td/><td>&lt;VSSolutionFolder&gt;\RuOsk\images\icon.ico</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
@@ -3990,7 +3998,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{37770A70-3BCF-460D-8EEF-7F46E49FD6C7}</td></row>
 		<row><td>ISUSSignature</td><td>{07E9F567-0B66-4C2A-874D-1DF846565CC4}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewISToday,viewProject,viewAppFiles,viewShortcuts</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4529,8 +4537,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>_Built</td><td>ruosk</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>RuOsk.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td/><td/><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>_Built1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>RuOsk.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td/><td/><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>_Built</td><td>ruosk</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>RuOsk.Primary_output</td><td>AlwaysInstall</td><td/><td>##ID_STRING4##</td><td/><td>_Built_77A69206DEBD4869BE47DAEBB2D9E880.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>_Built1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>RuOsk.Primary_output</td><td>AlwaysInstall</td><td/><td>##ID_STRING5##</td><td/><td>_Built1_3E45749727A1439984E043B3E07CF45A.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">
